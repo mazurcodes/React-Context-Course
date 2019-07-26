@@ -1,25 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Navbar from "./components/Navbar";
+import BookList from "./components/BookList";
+import styled from "styled-components";
+import ThemeContextProvider from "./contexts/ThemeContext";
+import ThemeToggle from "./components/ThemeToggle";
+import AuthContextProvider from "./contexts/AuthContext";
 
 function App() {
+  const StyledApp = styled.div`
+    max-width: 400px;
+    margin: 30px auto;
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  `;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StyledApp className="App">
+      <ThemeContextProvider>
+        <AuthContextProvider>
+          <Navbar />
+          <BookList />
+          <ThemeToggle />
+        </AuthContextProvider>
+      </ThemeContextProvider>
+    </StyledApp>
   );
 }
 
