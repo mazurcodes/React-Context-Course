@@ -1,41 +1,38 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
-import { ThemeContext } from "../contexts/ThemeContext";
+import { ThContext } from "../contexts/ThContext";
+import { BookContext } from "../contexts/BookContext";
 
-class BookList extends Component {
-  static contextType = ThemeContext;
-  render() {
-    // ************  CODE  ***************
-    const {isLightTheme, light, dark} = this.context;
-    const theme = isLightTheme ? light : dark;
+function BookList() {
+  const {isLightTheme, light, dark} = useContext(ThContext);
+  const theme = isLightTheme ? light : dark;
+  // console.log(BookContext);
+  const {books} = useContext(BookContext);
 
+  const BookListComp = styled.div`
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: ${theme.bg};
+    color: ${theme.syntax};
+  `;
+  const Ul = styled.ul`
+    list-style: none;
+  `;
+  const Li = styled.li`
+    padding: 10px;
+    margin: 10px auto;
+    border-radius: 10px;
+    background-color: ${theme.ui};
+  `;
 
-    // ************ STYLES ***************
-    const BookListComp = styled.div`
-      padding: 20px;
-      margin-bottom: 20px;
-      background-color: ${theme.bg};
-      color: ${theme.syntax};
-    `;
-    const Ul = styled.ul`
-      list-style: none;
-      `;
-    const Li = styled.li`
-      padding: 10px;
-      margin: 10px auto;
-      border-radius: 10px;
-      background-color: ${theme.ui};
-    `;
-
-    return (
-      <BookListComp>
-        <Ul>
-          <Li>the way of the king</Li>
-          <Li>the name of the wind</Li>
-          <Li>the final empire</Li>
-        </Ul>
-      </BookListComp>
-    );
-  }
+  const listOfBooks = books.map((book) => <Li key={book.id}>{book.title}</Li>);
+  return (
+    <BookListComp>
+      <Ul>
+        {listOfBooks}
+      </Ul>
+    </BookListComp>
+  );
 }
+
 export default BookList;

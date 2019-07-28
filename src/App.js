@@ -2,9 +2,10 @@ import React from "react";
 import Navbar from "./components/Navbar";
 import BookList from "./components/BookList";
 import styled from "styled-components";
-import ThemeContextProvider from "./contexts/ThemeContext";
+import ThemeContextProvider from "./contexts/ThContext";
 import ThemeToggle from "./components/ThemeToggle";
 import AuthContextProvider from "./contexts/AuthContext";
+import BookContextProvider from "./contexts/BookContext";
 
 function App() {
   const StyledApp = styled.div`
@@ -20,7 +21,9 @@ function App() {
       <ThemeContextProvider>
         <AuthContextProvider>
           <Navbar />
-          <BookList />
+          <BookContextProvider>
+            <BookList />
+          </BookContextProvider>
           <ThemeToggle />
         </AuthContextProvider>
       </ThemeContextProvider>

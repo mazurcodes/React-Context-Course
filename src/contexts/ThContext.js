@@ -1,6 +1,6 @@
 import React, { createContext, Component } from "react";
 
-export const ThemeContext = createContext();
+export const ThContext = createContext();
 
 class ThemeContextProvider extends Component {
   state = {
@@ -24,9 +24,9 @@ class ThemeContextProvider extends Component {
 
   render() {
     return (
-      <ThemeContext.Provider value={{ ...this.state, toggleTheme: this.toggleTheme }}>
+      <ThContext.Provider value={{ ...this.state, toggleTheme: this.toggleTheme }}>
         {this.props.children}
-      </ThemeContext.Provider>
+      </ThContext.Provider>
     );
   }
 }

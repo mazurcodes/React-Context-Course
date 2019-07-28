@@ -1,37 +1,32 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
-import { ThemeContext } from "../contexts/ThemeContext";
+import { ThContext } from "../contexts/ThContext";
 
-class Navbar extends Component {
-  static contextType = ThemeContext;
+function Navbar() {
+  const {isLightTheme, light, dark} = useContext(ThContext);
+  const theme = isLightTheme ? light : dark;
 
-  render() {
-    // *********** CODE ***************
-    const {isLightTheme, light, dark} = this.context;
-    const theme = isLightTheme ? light : dark;
+  // ************ STYLES ***************
+  const Nav = styled.nav`
+  padding: 20px 5px;
+  background-color: ${theme.ui};
+  color: ${theme.syntax};
+  `;
+  const Heading = styled.h1`
+    padding-bottom: 20px;
+    /* background-color: ${theme.ui}; */
+  `;
+  const Ul = styled.ul`
+    list-style: none;
+  `;
+  const Li = styled.li`
+    display: inline-block;
+    margin: 0 10px;
+    cursor: pointer;
+  `;
 
-
-    // ************ STYLES ***************
-    const Nav = styled.nav`
-      padding: 20px 5px;
-      background-color: ${theme.ui};
-      color: ${theme.syntax};
-      `;
-    const Heading = styled.h1`
-      padding-bottom: 20px;
-      /* background-color: ${theme.ui}; */
-    `;
-    const Ul = styled.ul`
-      list-style: none;
-    `;
-    const Li = styled.li`
-      display: inline-block;
-      margin: 0 10px;
-      cursor: pointer;
-    `;
-
-    return (
-      <Nav>
+  return (
+    <Nav>
         <Heading>Context app</Heading>
         <Ul>
           <Li>Home</Li>
@@ -39,8 +34,7 @@ class Navbar extends Component {
           <Li>Contact</Li>
         </Ul>
       </Nav>
-    );
-  }
+  )
 }
 
-export default Navbar;
+export default Navbar
